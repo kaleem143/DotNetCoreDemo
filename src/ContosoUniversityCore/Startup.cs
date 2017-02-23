@@ -13,6 +13,7 @@ using ContosoUniversityCore.Data;
 using ContosoUniversityCore.Models;
 using ContosoUniversityCore.Services;
 using ContosoUniversity.Data;
+using ContosoUniversity.Models;
 
 namespace ContosoUniversityCore
 {
@@ -58,7 +59,7 @@ namespace ContosoUniversityCore
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,SchoolContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -86,6 +87,7 @@ namespace ContosoUniversityCore
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            DbInitializer.Initialize(context);
         }
     }
 }
